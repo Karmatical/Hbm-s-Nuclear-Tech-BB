@@ -1,28 +1,31 @@
+
 # eclipse
-/eclipse
-/bin
+/eclipse/
+/bin/
 /*.launch
-/.settings
-/.metadata
+/.settings/
+/.metadata/
 /.classpath
 /.project
 
 # idea
-/out
+/out/
 /*.ipr
 /*.iws
 /*.iml
-/.idea
+/.idea/
+
+# temporary files
+/.utility
 
 # gradle
-/build
-/.gradle
+.gradle/
+**/.gradle/
+**/build/
+**/run/
 
 # vscode
 /.vscode
-
-# other
-/run
 
 # CurseForge configuration
 /curseforge.properties
