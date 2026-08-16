@@ -1,0 +1,64 @@
+
+[versions]
+# ==========================================================================
+# Common
+# ==========================================================================
+java                        = "17"
+minecraft                   = "b1.7.3"
+loom                        = "1.15-SNAPSHOT"
+log4jCore                   = "2.17.2"
+log4jSlf4j18Impl            = "2.17.1"
+lombok                      = "1.18.42"
+jetbrainsAnnotations        = "23.0.0"
+guava                       = "33.2.1-jre"
+
+# ==========================================================================
+# StationAPI
+# ==========================================================================
+stationapi                  = "2.0.0-alpha.6.2"
+stationapiLoader            = "0.17.3"
+stationapiYarnmappings      = "b1.7.3+e0778a3"
+stationapiGcapi             = "3.2.5"
+stationapiSlf4jApi          = "1.8.0-beta4"
+stationapiAlwaysmoreitems   = "1.10.1"
+stationapiModmenu           = "1.1.1"
+#stationapiGlassnetworking   = "1.0.7"
+
+# ==========================================================================
+# BTA
+# ==========================================================================
+bta                         = "8.0.1"
+btaChannel                  = "release"             # Options are release, prerelease, nightly, and misc.
+btaLoader                   = "0.18.4-bta.11"
+btaLwjgl                    = "3.3.3"               # This should match the version used by the current BTA release.
+btaSlf4jApi                 = "2.0.17"
+btaLegacyLwjgl              = "1.0.6"
+btaJoml                     = "1.10.8"              # Note: BTA uses 1.10.7, patch 8 removes the kotlin stdlib dependency
+btaJomlPrimitivess          = "1.10.0"
+btaModMenu                  = "5.0.2"
+btaHalplibe                 = "6.1.4+8.0"
+
+[libraries]
+btaLoader = { group = "net.fabricmc", name = "fabric-loader", version.ref = "btaLoader" }
+btaHalplibe = { group = "turniplabs", name = "halplibe", version.ref = "btaHalplibe" }
+btaModMenu = { group = "turniplabs", name = "modmenu-bta", version.ref = "btaModMenu" }
+btaLegacyLwjgl = { group = "com.github.Better-than-Adventure", name = "legacy-lwjgl3", version.ref = "btaLegacyLwjgl" }
+btaSlf4jApi = { group = "org.slf4j", name = "slf4j-api", version.ref = "btaSlf4jApi" }
+# https://piston-data.mojang.com/v1/objects/43db9b498cb67058d2e12d394e6507722e71bb45/client.jar
+btaClientJar = { group = "objects", name = "client", version = "43db9b498cb67058d2e12d394e6507722e71bb45" }
+btaJoml = { group = "org.joml", name = "joml", version.ref = "btaJoml" }
+btaJoml-primitives = { group = "org.joml", name = "joml-primitives", version.ref = "btaJomlPrimitivess" }
+btaLwjgl = { group = "org.lwjgl", name = "lwjgl", version.ref = "btaLwjgl"}
+btaLwjgl-glfw = { group = "org.lwjgl", name = "lwjgl-glfw", version.ref = "btaLwjgl"}
+btaLwjgl-openal = { group = "org.lwjgl", name = "lwjgl-openal", version.ref = "btaLwjgl"}
+btaLwjgl-opengl = { group = "org.lwjgl", name = "lwjgl-opengl", version.ref = "btaLwjgl"}
+btaLwjgl-stb = { group = "org.lwjgl", name = "lwjgl-stb", version.ref = "btaLwjgl"}
+
+# ==========================================================================
+# Other dependencies
+# ==========================================================================
+[bundles]
+btaLwjgl = ["btaLwjgl", "btaLwjgl-glfw", "btaLwjgl-openal", "btaLwjgl-opengl", "btaLwjgl-stb", "btaLegacyLwjgl"]
+
+[plugins]
+loom = { id = "net.fabricmc.fabric-loom", version.ref = "loom" }
