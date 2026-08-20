@@ -20,8 +20,6 @@ java {
 }
 
 loom {
-	// If you want to make a testmod for your mod, right click on src, and create a new folder with the same name as source() below.
-	// Intellij should give suggestions for testmod folders.
 	runs {
 		register("testClient") { source("test"); client(); configurations.transitiveImplementation }
 		register("testServer") { source("test"); server(); configurations.transitiveImplementation }
@@ -29,37 +27,39 @@ loom {
 }
 
 dependencies {
+	implementation(project(":common"))
+
 	// minecraft
-	minecraft("com.mojang:minecraft:${libs.versions.minecraft.get()}")
+	minecraft(libs.minecraft)
 
 	// development
-	mappings("net.glasslauncher:biny:${libs.versions.stationapiYarnmappings.get()}:v2")
-	modImplementation("net.fabricmc:fabric-loader:${libs.versions.stationapiLoader.get()}")
+	mappings("${libs.stationapiYarnmappings.get()}:v2")
+	modImplementation(libs.stationapiLoader)
 
 	// logging
-	implementation("org.apache.logging.log4j:log4j-core:${libs.versions.log4jCore.get()}")
-	implementation("org.slf4j:slf4j-api:${libs.versions.stationapiSlf4jApi.get()}")
-	implementation("org.apache.logging.log4j:log4j-slf4j18-impl:${libs.versions.log4jSlf4j18Impl.get()}")
+	implementation(libs.log4jCore)
+	implementation(libs.stationapiSlf4jApi)
+	implementation(libs.log4jSlf4j18Impl)
 
 	// convenience
-	compileOnly("org.projectlombok:lombok:${libs.versions.lombok.get()}")
-	annotationProcessor("org.projectlombok:lombok:${libs.versions.lombok.get()}")
+	compileOnly(libs.lombok)
+	annotationProcessor(libs.lombok)
 
 	// adds some useful annotations for miscellaneous uses. does not add any dependencies, though people without the lib will be missing some useful context hints.
-	implementation("org.jetbrains:annotations:${libs.versions.jetbrainsAnnotations.get()}")
-	implementation("com.google.guava:guava:${libs.versions.guava.get()}")
+	implementation(libs.jetbrainsAnnotations)
+	implementation(libs.guava)
 
 	// stationapi
 	// transitiveImplementation tells babric loom that you want this dependency to be pulled into other mod's development workspaces. Best used ONLY for required dependencies.
-	modImplementation("net.modificationstation:StationAPI:${libs.versions.stationapi.get()}")
+	modImplementation(libs.stationapi)
 
-	// development environment mods
+	// mods
 	// https://github.com/calmilamsy/glass-config-api
-	modImplementation("net.glasslauncher.mods:GlassConfigAPI:${libs.versions.stationapiGcapi.get()}")
+	modImplementation(libs.stationapiGcapi)
 	// https://github.com/calmilamsy/modmenu
-	modImplementation("net.danygames2014:modmenu:${libs.versions.stationapiModmenu.get()}")
+	modImplementation(libs.stationapiModmenu)
 	// https://github.com/Glass-Series/Always-More-Items
-	modImplementation("net.glasslauncher.mods:AlwaysMoreItems:${libs.versions.stationapiAlwaysmoreitems.get()}")
+	modImplementation(libs.stationapiAlwaysmoreitems)
 }
 
 repositories {
@@ -103,7 +103,6 @@ configurations.all {
 
 tasks.withType<ProcessResources> {
 	inputs.property("version", project.property("version"))
-
 	filesMatching("fabric.mod.json") {
 		expand(mapOf("version" to project.property("version")))
 	}
@@ -117,9 +116,7 @@ tasks.withType<JavaCompile> {
 }
 
 tasks.withType<Jar> {
-	from("LICENSE") {
-		rename { "${it}_${project.property("archivesBaseName")}" }
-	}
+	from("LICENSE") { rename { "${it}_${project.property("archivesBaseName")}" } }
 }
 
 tasks.withType<GenerateModuleMetadata> {

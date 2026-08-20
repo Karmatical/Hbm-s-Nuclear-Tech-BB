@@ -18,11 +18,11 @@ guava                       = "33.2.1-jre"
 stationapi                  = "2.0.0-alpha.6.2"
 stationapiLoader            = "0.17.3"
 stationapiYarnmappings      = "b1.7.3+e0778a3"
-stationapiGcapi             = "3.2.5"
 stationapiSlf4jApi          = "1.8.0-beta4"
-stationapiAlwaysmoreitems   = "1.10.1"
+stationapiGcapi             = "3.2.5"
+
 stationapiModmenu           = "1.1.1"
-#stationapiGlassnetworking   = "1.0.7"
+stationapiAlwaysmoreitems   = "1.10.1"							# NEI Equivalent
 
 # ==========================================================================
 # BTA
@@ -35,27 +35,54 @@ btaSlf4jApi                 = "2.0.17"
 btaLegacyLwjgl              = "1.0.6"
 btaJoml                     = "1.10.8"              # Note: BTA uses 1.10.7, patch 8 removes the kotlin stdlib dependency
 btaJomlPrimitivess          = "1.10.0"
-btaModMenu                  = "5.0.2"
 btaHalplibe                 = "6.1.4+8.0"
 
+btaModMenu                  = "5.0.2"
+btaTmb 											= "dCB4nI3Y"						# NEI Equivalent
+
 [libraries]
-btaLoader = { group = "net.fabricmc", name = "fabric-loader", version.ref = "btaLoader" }
-btaHalplibe = { group = "turniplabs", name = "halplibe", version.ref = "btaHalplibe" }
-btaModMenu = { group = "turniplabs", name = "modmenu-bta", version.ref = "btaModMenu" }
-btaLegacyLwjgl = { group = "com.github.Better-than-Adventure", name = "legacy-lwjgl3", version.ref = "btaLegacyLwjgl" }
-btaSlf4jApi = { group = "org.slf4j", name = "slf4j-api", version.ref = "btaSlf4jApi" }
-# https://piston-data.mojang.com/v1/objects/43db9b498cb67058d2e12d394e6507722e71bb45/client.jar
-btaClientJar = { group = "objects", name = "client", version = "43db9b498cb67058d2e12d394e6507722e71bb45" }
-btaJoml = { group = "org.joml", name = "joml", version.ref = "btaJoml" }
-btaJoml-primitives = { group = "org.joml", name = "joml-primitives", version.ref = "btaJomlPrimitivess" }
-btaLwjgl = { group = "org.lwjgl", name = "lwjgl", version.ref = "btaLwjgl"}
-btaLwjgl-glfw = { group = "org.lwjgl", name = "lwjgl-glfw", version.ref = "btaLwjgl"}
-btaLwjgl-openal = { group = "org.lwjgl", name = "lwjgl-openal", version.ref = "btaLwjgl"}
-btaLwjgl-opengl = { group = "org.lwjgl", name = "lwjgl-opengl", version.ref = "btaLwjgl"}
-btaLwjgl-stb = { group = "org.lwjgl", name = "lwjgl-stb", version.ref = "btaLwjgl"}
+# ==========================================================================
+# Common
+# ==========================================================================
+minecraft 								= { group = "com.mojang", 							name = "minecraft", 					version.ref = "minecraft"}
+log4jCore 								= { group = "org.apache.logging.log4j", name = "log4j-core",					version.ref = "log4jCore"}
+log4jSlf4j18Impl					= { group = "org.apache.logging.log4j", name = "log4j-slf4j18-impl", 	version.ref = "log4jSlf4j18Impl"}
+lombok										= { group = "org.projectlombok",			 	name = "lombok",						 	version.ref = "lombok"}
+jetbrainsAnnotations			= { group = "org.jetbrains", 						name = "annotations", 				version.ref = "jetbrainsAnnotations"}
+guava											= { group = "com.google.guava", 				name = "guava", 							version.ref = "guava"}
 
 # ==========================================================================
-# Other dependencies
+# StationAPI
+# ==========================================================================
+stationapi								= { group = "net.modificationstation", 	name = "StationAPI", 			version.ref = "stationapi"}
+stationapiYarnmappings		= { group = "net.glasslauncher", 				name = "biny", 						version.ref = "stationapiYarnmappings"}
+stationapiLoader					= { group = "net.fabricmc", 						name = "fabric-loader", 	version.ref = "stationapiLoader"}
+stationapiSlf4jApi				= { group = "org.slf4j", 								name = "slf4j-api", 			version.ref = "stationapiSlf4jApi"}
+stationapiGcapi						= { group = "net.glasslauncher.mods", 	name = "GlassConfigAPI", 	version.ref = "stationapiGcapi"}
+
+stationapiModmenu					= { group = "net.danygames2014", 				name = "modmenu", 				version.ref = "stationapiModmenu"}
+stationapiAlwaysmoreitems = { group = "net.glasslauncher.mods", 	name = "AlwaysMoreItems", version.ref = "stationapiAlwaysmoreitems"}
+
+# ==========================================================================
+# BTA
+# ==========================================================================
+# https://piston-data.mojang.com/v1/objects/43db9b498cb67058d2e12d394e6507722e71bb45/client.jar
+btaClientJar 				= { group = "objects", 				name = "client", 					version = "43db9b498cb67058d2e12d394e6507722e71bb45" }
+btaLegacyLwjgl 			= { group = "com.github.Better-than-Adventure", name = "legacy-lwjgl3", version.ref = "btaLegacyLwjgl" }
+btaLoader 					= { group = "net.fabricmc", 	name = "fabric-loader", 	version.ref = "btaLoader" }
+btaSlf4jApi 				= { group = "org.slf4j", 			name = "slf4j-api", 			version.ref = "btaSlf4jApi" }
+btaJoml 						= { group = "org.joml", 			name = "joml", 						version.ref = "btaJoml" }
+btaJoml-primitives	= { group = "org.joml", 			name = "joml-primitives", version.ref = "btaJomlPrimitivess" }
+btaLwjgl 						= { group = "org.lwjgl", 			name = "lwjgl", 					version.ref = "btaLwjgl"}
+btaLwjgl-glfw 			= { group = "org.lwjgl", 			name = "lwjgl-glfw", 			version.ref = "btaLwjgl"}
+btaLwjgl-openal 		= { group = "org.lwjgl", 			name = "lwjgl-openal", 		version.ref = "btaLwjgl"}
+btaLwjgl-opengl 		= { group = "org.lwjgl", 			name = "lwjgl-opengl", 		version.ref = "btaLwjgl"}
+btaLwjgl-stb 				= { group = "org.lwjgl", 			name = "lwjgl-stb", 			version.ref = "btaLwjgl"}
+btaHalplibe 				= { group = "turniplabs", 		name = "halplibe", 				version.ref = "btaHalplibe" }
+
+btaModMenu 					= { group = "turniplabs", 		name = "modmenu-bta", 		version.ref = "btaModMenu" }
+btaTmb 							= { group = "maven.modrinth", name = "7W2NXWEu", 				version.ref = "btaTmb" }
+
 # ==========================================================================
 [bundles]
 btaLwjgl = ["btaLwjgl", "btaLwjgl-glfw", "btaLwjgl-openal", "btaLwjgl-opengl", "btaLwjgl-stb", "btaLegacyLwjgl"]

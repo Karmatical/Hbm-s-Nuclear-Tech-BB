@@ -1,3 +1,4 @@
+import java.net.URI
 
 plugins {
     alias(libs.plugins.loom)
@@ -63,12 +64,10 @@ loom {
 }
 
 dependencies {
+	implementation(project(":common"))
+
     // minecraft
     minecraft("::${libs.versions.bta.get()}")
-
-    // runtime
-    implementation(libs.btaLoader)
-    implementation(libs.btaHalplibe)
 
     // compilation
     compileOnly(libs.bundles.btaLwjgl)
@@ -76,20 +75,29 @@ dependencies {
     compileOnly(libs.btaJoml.primitives)
     compileOnly(libs.btaSlf4jApi)
 
+	// runtime
+	implementation(libs.btaLoader)
+	implementation(libs.btaHalplibe)
+
     // development
+	runtimeClasspath(libs.btaClientJar)
+	localRuntime(platform("org.lwjgl:lwjgl-bom:${libs.versions.btaLwjgl.get()}"))
+	localRuntime("org.lwjgl:lwjgl::$lwjglNatives")
+	localRuntime("org.lwjgl:lwjgl-glfw::$lwjglNatives")
+	localRuntime("org.lwjgl:lwjgl-openal::$lwjglNatives")
+	localRuntime("org.lwjgl:lwjgl-opengl::$lwjglNatives")
+	localRuntime("org.lwjgl:lwjgl-stb::$lwjglNatives")
+
     localRuntime(libs.btaModMenu)
-    runtimeClasspath(libs.btaClientJar)
-    val lwjglVer = libs.versions.btaLwjgl.get()
-    localRuntime(platform("org.lwjgl:lwjgl-bom:${lwjglVer}"))
-    localRuntime("org.lwjgl:lwjgl::$lwjglNatives")
-    localRuntime("org.lwjgl:lwjgl-glfw::$lwjglNatives")
-    localRuntime("org.lwjgl:lwjgl-openal::$lwjglNatives")
-    localRuntime("org.lwjgl:lwjgl-opengl::$lwjglNatives")
-    localRuntime("org.lwjgl:lwjgl-stb::$lwjglNatives")
+	localRuntime(libs.btaTmb)
 }
 
 repositories {
     mavenCentral()
+	exclusiveContent {
+		forRepository { maven("https://api.modrinth.com/maven") }
+		filter { includeGroup("maven.modrinth") }
+	}
     ivy("https://piston-data.mojang.com") {
         patternLayout { artifact("v1/[organisation]/[revision]/[module].jar") }
         metadataSources { artifact() }
